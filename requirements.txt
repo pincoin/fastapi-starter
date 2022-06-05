@@ -1,0 +1,5 @@
+fastapi==0.78.0
+uvicorn==0.17.6
+SQLAlchemy==1.4.37
+greenlet==1.1.2
+aiosqlite==0.17.0

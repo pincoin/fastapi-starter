@@ -1,4 +1,3 @@
-from curses import meta
 import sqlalchemy
 
 metadata = sqlalchemy.MetaData()
@@ -18,3 +17,7 @@ todos = sqlalchemy.Table(
     sqlalchemy.Column("priority", sqlalchemy.Integer()),
     sqlalchemy.Column("complete", sqlalchemy.Boolean(), default=False),
 )
+
+all = [
+    todos,
+]

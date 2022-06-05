@@ -24,19 +24,22 @@ async def shutdown():
 
 @app.get("/init")
 async def create_database(conn: AsyncConnection = Depends(engine_begin)):
-    # await conn.execute(CreateTable(tables.todos))
-    return {"Database": "Created"}
+    # tables.metadata.create_all(engien) - does not work asynchronously!
+    # Inspection on an AsyncEngine is currently not supported.
+    for table in tables.all:
+        await conn.execute(CreateTable(table))
+    return {"Database": "Initialized"}
 
 
 @app.get("/")
 async def read_all(conn: AsyncConnection = Depends(engine_connect)):
     cr: CursorResult = await conn.execute(tables.todos.select())
-    # 순차적 데이터 조작이 필요한 경우 CursorResult 인스턴스 이용
+    # Use CursorResult if you need iterate data.
     """
     for row in cr:
         print(row)
     """
-    # 데이터를 단순히 반환하기 위해서는 fetchall()
+    # Use fetchall() if you need to return all
     return cr.fetchall()
 
 

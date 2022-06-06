@@ -6,7 +6,7 @@ This project is based on SQLAlchemy 1.4+ in order to utilize async connections.
 ## requirements
 * FastAPI
 * SQLAlchemy[asyncio]
-* aiosqlite
+* aiosqlite (SQLite) or asyncpg (PostgreSQL)
 * uvicorn
 
 ## `app/conf/secret.json`
@@ -25,6 +25,14 @@ This project is based on SQLAlchemy 1.4+ in order to utilize async connections.
         }
     }
 }
+```
+
+If you use PostgreSQL, you may change SQLALCHEMY settings like this:
+
+```json
+    "SQLALCHEMY": {
+        "DATABASE_URI": "postgresql+asyncpg://username:password@host:port/database"
+    }
 ```
 
 ## Run
